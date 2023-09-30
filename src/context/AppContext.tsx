@@ -28,7 +28,7 @@ export const AppContext = createContext<AppContextState | null>(null);
 export const AppContextDispatch =
   createContext<React.Dispatch<AppContextAction> | null>(null);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, react-refresh/only-export-components
+// eslint-disable-next-line react-refresh/only-export-components
 export function appReducer(
   state: AppContextState,
   action: AppContextAction
