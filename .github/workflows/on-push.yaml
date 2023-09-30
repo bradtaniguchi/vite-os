@@ -30,7 +30,7 @@ jobs:
         run: npm run build
 
       - name: include storybook to dist
-        run: cp -r ./storybook-static ./build/storybook
+        run: cp -r ./storybook-static ./dist/storybook
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
