@@ -11,7 +11,6 @@ export function AppPane(props: {
   appInstance: AppInstance;
   desktopRef: RefObject<Element>;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { appInstance, desktopRef } = props;
 
   // TODO: implement resizing
