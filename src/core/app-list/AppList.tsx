@@ -37,7 +37,7 @@ export function AppList() {
     );
 
   return (
-    <ul className="grid grid-cols-4 gap-4 grid-rows-4 h-full p-4">
+    <ul className="grid grid-cols-4 gap-4 grid-rows-4 h-full p-4 z-10">
       {apps.map((app) => (
         <li key={app.id}>
           <AppListItem app={app} onClick={handleOnAppListItemClick} />

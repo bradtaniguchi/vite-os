@@ -2,22 +2,26 @@ import { useContext, useRef } from "react";
 import { AppContext } from "../../context/AppContext";
 import { AppBar } from "../app-bar/AppBar";
 import { AppList } from "../app-list/AppList";
+import { AppPane } from "../app-pane/AppPane";
+import { motion } from "framer-motion";
 
 export function AppContainer() {
-  // TODO: move ref to external context.
-  const desktopRef = useRef();
+  const desktopRef = useRef(null);
 
-  const { listOpened } = useContext(AppContext) ?? {};
+  const { listOpened, appInstances } = useContext(AppContext) ?? {};
 
   return (
     <div className="flex flex-col h-screen bg-green-300">
-      <div
-        className="flex-1 bg-green-300"
-        id="desktop"
-        ref={desktopRef.current}
-      >
+      <motion.div ref={desktopRef} className="flex-1 bg-green-300" id="desktop">
         {listOpened && <AppList />}
-      </div>
+        {appInstances?.map((appInstance) => (
+          <AppPane
+            key={appInstance.id}
+            appInstance={appInstance}
+            desktopRef={desktopRef}
+          />
+        ))}
+      </motion.div>
 
       <AppBar />
     </div>
