@@ -66,10 +66,19 @@ export function appReducer(
  *
  * @param props AppProvider props
  */
-export function AppProvider(props: PropsWithChildren) {
+export function AppProvider(
+  props: PropsWithChildren<{
+    /**
+     * List of apps that could be provided to override the defaults.
+     */
+    apps?: App[];
+  }>
+) {
+  const { apps } = props;
+
   const [state, dispatch] = useReducer(appReducer, {
     listOpened: false,
-    apps: APPS,
+    apps: apps ?? APPS,
     appInstances: [],
   });
 

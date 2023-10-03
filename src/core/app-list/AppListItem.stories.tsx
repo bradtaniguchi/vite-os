@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof AppListItem>;
 
-export const Primary: Story = {
+export const HelloWorld: Story = {
   args: {
     app: HELLO_WORLD_APP,
   },
