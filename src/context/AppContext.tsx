@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, createContext, useReducer } from "react";
 import { App, AppInstance } from "../types/app";
+import { APPS } from "../constants/apps";
 
 /**
  * The application context. This state should handle
@@ -12,9 +13,10 @@ export interface AppContextState {
    */
   listOpened: boolean;
   /**
-   * The apps currently displayed/opened on the desktop
+   * The apps currently available within the system, this is a state variable to make
+   * it easier to dynamically edit/update apps on the fly.
    */
-  apps: App["id"][];
+  apps: App[];
   /**
    * The list of app instances.
    */
@@ -47,12 +49,12 @@ export function appReducer(
     case "CLOSE_APP":
       return {
         ...state,
-        apps: state.apps.filter((id) => id !== action.appInstanceId),
+        apps: state.apps.filter(({ id }) => id !== action.appInstanceId),
       };
     case "OPEN_APP":
       return {
         ...state,
-        apps: [...state.apps, action.appInstanceId],
+        appInstances: [...state.appInstances, action.appInstance],
       };
     default:
       return state;
@@ -67,7 +69,7 @@ export function appReducer(
 export function AppProvider(props: PropsWithChildren) {
   const [state, dispatch] = useReducer(appReducer, {
     listOpened: false,
-    apps: [],
+    apps: APPS,
     appInstances: [],
   });
 
@@ -93,7 +95,7 @@ export type AppContextAction =
     }
   | {
       type: "OPEN_APP";
-      appInstanceId: AppInstance["id"];
+      appInstance: AppInstance;
     }
   | {
       type: "CLOSE_APP";

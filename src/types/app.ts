@@ -7,6 +7,10 @@ export interface App {
    * The name of the app, used for display purposes.
    */
   readonly name: string;
+  /**
+   * The icon of the app, used for display purposes.
+   */
+  readonly icon: string;
 }
 
 export interface AppInstance extends App {
