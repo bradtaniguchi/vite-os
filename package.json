@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "clean": "npx rimraf dist storybook-static"
+    "clean": "npx rimraf dist storybook-static",
+    "bundle-report": "vite-bundle-visualizer --output dist/stats.html --open false",
+    "view-bundle-report": "live-server dist/stats.html"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -42,11 +44,13 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-storybook": "^0.6.14",
+    "live-server": "^1.2.2",
     "postcss": "^8.4.30",
     "rimraf": "^5.0.5",
     "storybook": "^7.4.5",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-bundle-visualizer": "^0.10.0"
   }
 }
