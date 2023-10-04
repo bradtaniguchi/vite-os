@@ -49,7 +49,9 @@ export function appReducer(
     case "CLOSE_APP":
       return {
         ...state,
-        apps: state.apps.filter(({ id }) => id !== action.appInstanceId),
+        appInstances: state.appInstances.filter(
+          ({ instanceId }) => instanceId !== action.appInstanceId
+        ),
       };
     case "OPEN_APP":
       return {
