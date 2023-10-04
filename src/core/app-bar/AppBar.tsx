@@ -1,8 +1,9 @@
 import { Navbar } from "flowbite-react";
 import { AppIconButton } from "./AppIconButton";
-import { useContext } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useCallback, useContext } from "react";
+import { AppContext, AppContextDispatch } from "../../context/AppContext";
 import { AppBarInstanceButton } from "./AppBarInstanceButton";
+import { AppInstance } from "../../types/app";
 
 /**
  * The AppBar is shown on the side/bottom of the screen and contains
@@ -10,6 +11,20 @@ import { AppBarInstanceButton } from "./AppBarInstanceButton";
  */
 export function AppBar() {
   const { appInstances } = useContext(AppContext) ?? {};
+  const dispatch = useContext(AppContextDispatch);
+
+  const handleAppBarInstanceButtonClick = useCallback(
+    (app: AppInstance) => {
+      if (app.viewState === "minimized") {
+        if (dispatch)
+          dispatch({
+            type: "MAXIMIZE_APP",
+            appInstanceId: app.instanceId,
+          });
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <Navbar fluid rounded id="app-bar" className="m-1">
@@ -20,6 +35,7 @@ export function AppBar() {
             <AppBarInstanceButton
               key={appInstance.instanceId}
               appInstance={appInstance}
+              onClick={handleAppBarInstanceButtonClick}
             />
           ))}
         </div>

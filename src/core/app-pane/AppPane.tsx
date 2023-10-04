@@ -16,8 +16,28 @@ export function AppPane(props: {
   appInstance: AppInstance;
   desktopRef: RefObject<Element>;
   onClose: (appInstance: AppInstance) => void;
+  onMinimize: (appInstance: AppInstance) => void;
+  onMaximize: (appInstance: AppInstance) => void;
 }) {
-  const { appInstance, desktopRef, onClose } = props;
+  const { appInstance, desktopRef, onMinimize, onMaximize, onClose } = props;
+
+  const handleMinimize = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      event.stopPropagation();
+
+      onMinimize(appInstance);
+    },
+    [appInstance, onMinimize]
+  );
+
+  const handleMaximize = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      event.stopPropagation();
+
+      onMaximize(appInstance);
+    },
+    [appInstance, onMaximize]
+  );
 
   const handleOnClose = useCallback(
     (event: MouseEvent<HTMLElement>) => {
@@ -35,25 +55,54 @@ export function AppPane(props: {
       <Card>
         {/* <div className="bg-slate-500 w-full h-8">Header</div> */}
         <Card className="w-full h-8">
-          <div className="flex flex-row justify-end p-2">
+          {/* TODO: fix layout */}
+          <div className="flex flex-row justify-between p-2">
             {/* TODO: add secondary buttons to the left, for fancier features */}
+            <div>
+              {appInstance.icon}
+              {appInstance.name}
+            </div>
 
-            <button type="button" aria-label="minimize window">
-              <MinusCircleIcon className="h-6 w-6" />
-            </button>
+            <div>
+              {(() => {
+                if (
+                  appInstance.viewState === "maximized" ||
+                  appInstance.viewState === "normal"
+                )
+                  return (
+                    <button
+                      type="button"
+                      aria-label="minimize window"
+                      onClick={handleMinimize}
+                    >
+                      <MinusCircleIcon className="h-6 w-6" />
+                    </button>
+                  );
+                if (
+                  appInstance.viewState === "minimized" ||
+                  appInstance.viewState === "normal"
+                )
+                  return (
+                    <button
+                      type="button"
+                      aria-label="maximize window"
+                      onClick={handleMaximize}
+                    >
+                      {/* TODO: this probably should change */}
+                      <WindowIcon className="h-6 w-6" />
+                    </button>
+                  );
+                return null;
+              })()}
 
-            <button type="button" aria-label="maximize window">
-              {/* TODO: this probably should change */}
-              <WindowIcon className="h-6 w-6" />
-            </button>
-
-            <button
-              type="button"
-              aria-label="close window"
-              onClick={handleOnClose}
-            >
-              <XCircleIcon className="h-6 w-6" />
-            </button>
+              <button
+                type="button"
+                aria-label="close window"
+                onClick={handleOnClose}
+              >
+                <XCircleIcon className="h-6 w-6" />
+              </button>
+            </div>
           </div>
         </Card>
 

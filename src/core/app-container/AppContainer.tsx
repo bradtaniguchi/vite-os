@@ -20,18 +20,38 @@ export function AppContainer() {
     [dispatch]
   );
 
+  const handleOnMinimize = useCallback(
+    (app: AppInstance) => {
+      if (dispatch)
+        dispatch({ type: "MINIMIZE_APP", appInstanceId: app.instanceId });
+    },
+    [dispatch]
+  );
+
+  const handleOnMaximize = useCallback(
+    (app: AppInstance) => {
+      if (dispatch)
+        dispatch({ type: "MAXIMIZE_APP", appInstanceId: app.instanceId });
+    },
+    [dispatch]
+  );
+
   return (
     <div className="flex flex-col h-screen bg-green-300">
       <motion.div ref={desktopRef} className="flex-1 bg-green-300" id="desktop">
         {listOpened && <AppList />}
-        {appInstances?.map((appInstance) => (
-          <AppPane
-            key={appInstance.id}
-            appInstance={appInstance}
-            desktopRef={desktopRef}
-            onClose={handleOnClose}
-          />
-        ))}
+        {appInstances
+          ?.filter(({ viewState }) => viewState !== "minimized")
+          ?.map((appInstance) => (
+            <AppPane
+              key={appInstance.id}
+              appInstance={appInstance}
+              desktopRef={desktopRef}
+              onClose={handleOnClose}
+              onMinimize={handleOnMinimize}
+              onMaximize={handleOnMaximize}
+            />
+          ))}
       </motion.div>
 
       <AppBar />

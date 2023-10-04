@@ -58,6 +58,34 @@ export function appReducer(
         ...state,
         appInstances: [...state.appInstances, action.appInstance],
       };
+    case "MINIMIZE_APP":
+      return {
+        ...state,
+        appInstances: state.appInstances.map((appInstance) => {
+          if (appInstance.id === action.appInstanceId) {
+            return {
+              ...appInstance,
+              minimized: true,
+            };
+          }
+
+          return appInstance;
+        }),
+      };
+    case "MAXIMIZE_APP":
+      return {
+        ...state,
+        appInstances: state.appInstances.map((appInstance) => {
+          if (appInstance.id === action.appInstanceId) {
+            return {
+              ...appInstance,
+              minimized: false,
+            };
+          }
+
+          return appInstance;
+        }),
+      };
     default:
       return state;
   }
@@ -110,5 +138,13 @@ export type AppContextAction =
     }
   | {
       type: "CLOSE_APP";
+      appInstanceId: AppInstance["id"];
+    }
+  | {
+      type: "MINIMIZE_APP";
+      appInstanceId: AppInstance["id"];
+    }
+  | {
+      type: "MAXIMIZE_APP";
       appInstanceId: AppInstance["id"];
     };
