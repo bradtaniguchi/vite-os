@@ -6,6 +6,10 @@ import { AppPane } from "../app-pane/AppPane";
 import { motion } from "framer-motion";
 import { AppInstance } from "../../types/app";
 
+/**
+ * Component that renders the desktop environment where apps can reside.
+ * This also acts as a framer-motion reference for drag and drop of windows.
+ */
 export function AppContainer() {
   const desktopRef = useRef(null);
 
