@@ -18,7 +18,6 @@ export function AppList() {
           type: "OPEN_APP",
           appInstance: {
             ...app,
-            // TODO: should be loaded from constants.
             viewState: "normal",
             instanceId: getId(),
           },

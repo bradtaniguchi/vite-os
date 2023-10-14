@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, createContext, useReducer } from "react";
+import React, {
+  PropsWithChildren,
+  createContext,
+  useEffect,
+  useReducer,
+} from "react";
 import { App, AppInstance } from "../types/app";
 import { APPS } from "../constants/apps";
 
@@ -62,10 +67,10 @@ export function appReducer(
       return {
         ...state,
         appInstances: state.appInstances.map((appInstance) => {
-          if (appInstance.id === action.appInstanceId) {
+          if (appInstance.instanceId === action.appInstanceId) {
             return {
               ...appInstance,
-              minimized: true,
+              viewState: "minimized",
             };
           }
 
@@ -76,10 +81,10 @@ export function appReducer(
       return {
         ...state,
         appInstances: state.appInstances.map((appInstance) => {
-          if (appInstance.id === action.appInstanceId) {
+          if (appInstance.instanceId === action.appInstanceId) {
             return {
               ...appInstance,
-              minimized: false,
+              viewState: "normal",
             };
           }
 
@@ -111,6 +116,10 @@ export function AppProvider(
     apps: apps ?? APPS,
     appInstances: [],
   });
+
+  useEffect(() => {
+    console.log(">> state:", state);
+  }, [state]);
 
   return (
     <AppContext.Provider value={state}>
