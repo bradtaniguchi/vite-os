@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AppPane } from "./AppPane";
-import { HELLO_WORLD_APP } from "../../apps/hello-world-def";
+import { HELLO_WORLD_APP } from "../../apps/hello-world/hello-world-def";
 import { getId } from "../../utils/get-id";
 
 const meta: Meta<typeof AppPane> = {

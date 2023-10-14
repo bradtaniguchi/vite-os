@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { AppList } from "./AppList";
 import { AppProvider } from "../../context/AppContext";
-import { HELLO_WORLD_APP } from "../../apps/hello-world-def";
+import { HELLO_WORLD_APP } from "../../apps/hello-world/hello-world-def";
 
 const meta: Meta<typeof AppList> = {
   component: AppList,

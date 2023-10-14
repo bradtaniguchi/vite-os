@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import { AppBarInstanceButton } from "./AppBarInstanceButton";
-import { HELLO_WORLD_APP } from "../../apps/hello-world-def";
+import { HELLO_WORLD_APP } from "../../apps/hello-world/hello-world-def";
 import { getId } from "../../utils/get-id";
 
 const meta: Meta<typeof AppBarInstanceButton> = {

@@ -1,4 +1,4 @@
-import { App } from "../types/app";
+import { App } from "../../types/app";
 
 export const HELLO_WORLD_APP: App = {
   id: "hello-world",
