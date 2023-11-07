@@ -1,12 +1,13 @@
 import { Card } from "flowbite-react";
 import { AppInstance } from "../../types/app";
 import { motion } from "framer-motion";
-import { RefObject, useCallback, MouseEvent } from "react";
+import { RefObject, useCallback, MouseEvent, useMemo, Suspense } from "react";
 import {
   XCircleIcon,
   MinusCircleIcon,
   WindowIcon,
 } from "@heroicons/react/24/solid";
+import { ErrorBoundary } from "react-error-boundary";
 
 /**
  * An app-pane is what contains the actual app-instance.
@@ -20,6 +21,8 @@ export function AppPane(props: {
   onMaximize: (appInstance: AppInstance) => void;
 }) {
   const { appInstance, desktopRef, onMinimize, onMaximize, onClose } = props;
+
+  const AppInstance = useMemo(() => appInstance.factory(), [appInstance]);
 
   const handleMinimize = useCallback(
     (event: MouseEvent<HTMLElement>) => {
@@ -107,7 +110,20 @@ export function AppPane(props: {
         </Card>
 
         <div id={`panel-content-${appInstance.instanceId}`}>
-          <pre>{JSON.stringify(appInstance, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(appInstance, null, 2)}</pre> */}
+          <ErrorBoundary
+            fallback={
+              // TODO: expand
+              <div>
+                <h1>Something went wrong, check the browser console</h1>
+                {/* <pre>{JSON.stringify(error, null, 2)}</pre> */}
+              </div>
+            }
+          >
+            <Suspense fallback={<div>loading...</div>}>
+              <AppInstance />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </Card>
     </motion.div>

@@ -12,7 +12,7 @@ import { useMemo } from "react";
  */
 export function useAppService(appId: App["id"]) {
   const [localStorageValue, setLocalStorageValue, removeLocalStorageValue] =
-    useLocalStorage(`app:${appId}`, {});
+    useLocalStorage(`app:${appId}`, {}, { raw: true });
 
   const localStorageService = useMemo(
     () => ({
