@@ -1,0 +1,1 @@
+{"version":3,"file":"explorer-app-e14f3a4d.js","sources":["../../src/apps/explorer/explorer-app.tsx"],"sourcesContent":["export function ExplorerApp() {\n  return (\n    <div>\n      <h1>Explorer app</h1>\n    </div>\n  );\n}\n"],"names":["ExplorerApp","jsx"],"mappings":"iJAAO,SAASA,GAAc,CAC5B,OACGC,MAAA,MAAA,CACC,SAACA,EAAA,IAAA,KAAA,CAAG,wBAAY,CAClB,CAAA,CAEJ"}

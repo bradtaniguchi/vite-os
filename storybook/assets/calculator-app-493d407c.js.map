@@ -1,0 +1,1 @@
+{"version":3,"file":"calculator-app-493d407c.js","sources":["../../src/apps/calculator/calculator-app.tsx"],"sourcesContent":["export function CalculatorApp() {\n  return (\n    <div>\n      <h1>Calculator app</h1>\n    </div>\n  );\n}\n"],"names":["CalculatorApp","jsx"],"mappings":"iJAAO,SAASA,GAAgB,CAC9B,OACGC,MAAA,MAAA,CACC,SAACA,EAAA,IAAA,KAAA,CAAG,0BAAc,CACpB,CAAA,CAEJ"}
