@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { App, AppInstance } from "../types/app";
 import { APPS } from "../constants/apps";
+import { useLocalStorage } from "react-use";
 
 /**
  * The application context. This state should handle
@@ -111,15 +112,19 @@ export function AppProvider(
 ) {
   const { apps } = props;
 
+  const [localStorageState, setState] = useLocalStorage("apps:state", {});
+
   const [state, dispatch] = useReducer(appReducer, {
     listOpened: false,
     apps: apps ?? APPS,
     appInstances: [],
+    ...localStorageState,
   });
 
   useEffect(() => {
     console.log(">> state:", state);
-  }, [state]);
+    setState(state);
+  }, [state, setState]);
 
   return (
     <AppContext.Provider value={state}>
